@@ -11,7 +11,11 @@ app.get('/', async(req, res) => {
 });
 
 app.get('/weather', async (req, res) => {
+    try {
 
+    } catch {
+        
+    }
 });
 
 app.listen(PORT, () => {
