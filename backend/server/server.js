@@ -11,6 +11,14 @@ app.get('/', async(req, res) => {
 });
 
 app.get('/weather', async (req, res) => {
+    const city = req.query.cityName;
+    const apiKey = process.env.WEATHER_API;
+    const params = new URLSearchParams({
+        q: city,
+        appid: apiKey,
+        units: "imperial",
+    });
+    
     try {
 
     } catch {
