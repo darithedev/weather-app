@@ -18,6 +18,7 @@ app.get('/weather', async (req, res) => {
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
     
+    let lat, lon;
     try {
         const geoParams = new URLSearchParams({
             q: city,
