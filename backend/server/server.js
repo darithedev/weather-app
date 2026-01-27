@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { fetchGeolocation } from '../helper/geolocation';
+import { fetchGeolocation } from '../helper/geolocation.js';
 
 dotenv.config({ path: '.env' });
 
