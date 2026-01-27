@@ -14,8 +14,8 @@ app.get('/', async(req, res) => {
     res.json({ message: "Server is healthy!"})
 });
 
-app.get('/weather', async (req, res) => {
-    const city = req.query.cityName;
+app.get('/weather/:cityName', async (req, res) => {
+    const city = req.params.cityName;
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
 
@@ -35,7 +35,7 @@ app.get('/weather', async (req, res) => {
 
         const data = await response.json();
 
-        res.status(200).json(data[0]);
+        res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
