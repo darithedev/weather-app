@@ -18,10 +18,13 @@ app.get('/weather', async (req, res) => {
     const city = req.query.cityName;
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
-    
+
     try {
+        const { lat, lon } = await fetchGeolocation(city, apiKey);
+
         const params = new URLSearchParams({
-            q: city,
+            lat,
+            lon,
             appid: apiKey,
             units: unit,
         });
@@ -31,8 +34,6 @@ app.get('/weather', async (req, res) => {
         const response = await fetch(url);
 
         const data = await response.json();
-
-        ({ lat, lon } = await fetchGeolocation(city, apiKey));
 
         res.status(200).json(data[0]);
     } catch (error) {
