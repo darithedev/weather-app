@@ -35,8 +35,8 @@ app.get('/weather', async (req, res) => {
         ({ lat, lon } = data[0]);
 
         res.status(200).json(data);
-    } catch {
-
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
     
     const params = new URLSearchParams({
