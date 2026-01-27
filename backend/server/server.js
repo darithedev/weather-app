@@ -72,6 +72,36 @@ app.get('/forcast/daily/:cityName/:days', async(req, res) => {
     }
 });
 
+// Hourly forcast for up to 4 days
+app.get('/forcast/hourly/:cityName/:hours', async(req, res) => {
+    const city = req.params.cityName;
+    const apiKey = process.env.WEATHER_API;
+    const unit = req.query.units;
+    const timestamps = req.params.hours 
+
+    try {
+        const { lat, lon } = await fetchGeolocation(city, apiKey);
+
+        const params = new URLSearchParams({
+            lat,
+            lon,
+            appid: apiKey,
+            cnt: timestamps,
+            units: unit,
+        });
+
+        const url = `https://pro.openweathermap.org/data/2.5/forecast/hourly?${params}`;
+
+        const response = await fetch(url);
+
+        const data = await response.json()
+
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`)
 });
