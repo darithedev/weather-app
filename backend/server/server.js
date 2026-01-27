@@ -23,6 +23,8 @@ app.get('/weather', async (req, res) => {
         appid: process.env.WEATHER_API,
         limit: 1,
     });
+
+    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?${geoParams}`;
     
     const params = new URLSearchParams({
         q: city,
