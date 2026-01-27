@@ -35,8 +35,8 @@ app.get('/weather', async (req, res) => {
         ({ lat, lon } = await fetchGeolocation(city));
 
         res.status(200).json(data[0]);
-    } catch {
-        
+    } catch (error) {
+        res.status(500).json({ error: error.message })
     }
 });
 
