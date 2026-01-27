@@ -14,6 +14,7 @@ app.get('/', async(req, res) => {
     res.json({ message: "Server is healthy!"})
 });
 
+// Current weather data
 app.get('/weather/:cityName', async (req, res) => {
     const city = req.params.cityName;
     const apiKey = process.env.WEATHER_API;
