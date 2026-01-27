@@ -18,13 +18,17 @@ app.get('/weather', async (req, res) => {
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
     
-    const geoParams = new URLSearchParams({
-        q: city,
-        appid: process.env.WEATHER_API,
-        limit: 1,
-    });
+    try {
+        const geoParams = new URLSearchParams({
+            q: city,
+            appid: process.env.WEATHER_API,
+            limit: 1,
+        });
 
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?${geoParams}`;
+        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?${geoParams}`;
+    } catch {
+
+    }
     
     const params = new URLSearchParams({
         q: city,
