@@ -1,8 +1,8 @@
-export async function fetchGeolocation(city) {
+export async function fetchGeolocation(city, apiKey) {
     let lat, lon;
     const geoParams = new URLSearchParams({
         q: city,
-        appid: process.env.WEATHER_API,
+        appid: apiKey,
         limit: 1,
     });
 

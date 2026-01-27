@@ -32,7 +32,7 @@ app.get('/weather', async (req, res) => {
 
         const data = await response.json();
 
-        ({ lat, lon } = await fetchGeolocation(city));
+        ({ lat, lon } = await fetchGeolocation(city, apiKey));
 
         res.status(200).json(data[0]);
     } catch (error) {
