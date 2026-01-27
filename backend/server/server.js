@@ -19,16 +19,22 @@ app.get('/weather', async (req, res) => {
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
     
-    const params = new URLSearchParams({
-        q: city,
-        appid: apiKey,
-        units: unit,
-    });
-    
-    const url = `https://api.openweathermap.org/data/2.5/weather?${params}`;
-    
     try {
+        const params = new URLSearchParams({
+            q: city,
+            appid: apiKey,
+            units: unit,
+        });
+        
+        const url = `https://api.openweathermap.org/data/2.5/weather?${params}`;
 
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        ({ lat, lon } = await fetchGeolocation(city));
+
+        res.status(200).json(data[0]);
     } catch {
         
     }
