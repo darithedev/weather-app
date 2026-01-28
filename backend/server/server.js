@@ -42,8 +42,8 @@ app.get('/weather/:cityName', async (req, res) => {
     }
 });
 
-// Daily forcast for up to 16 days
-app.get('/forcast/daily/:cityName/:days', async(req, res) => {
+// Daily forecast for up to 16 days
+app.get('/forecast/daily/:cityName/:days', async(req, res) => {
     const city = req.params.cityName;
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
@@ -72,8 +72,8 @@ app.get('/forcast/daily/:cityName/:days', async(req, res) => {
     }
 });
 
-// Hourly forcast for up to 4 days
-app.get('/forcast/hourly/:cityName/:hours', async(req, res) => {
+// Hourly forecast for up to 4 days
+app.get('/forecast/hourly/:cityName/:hours', async(req, res) => {
     const city = req.params.cityName;
     const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
