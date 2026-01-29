@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { fetchGeolocation } from '../helper/geolocation.js';
+import { fetchStatus } from '../helper/responseStatus.js';
 
 dotenv.config({ path: '.env' });
 
@@ -12,6 +13,18 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Will throw error if .env is not configured with api key
+const appid = process.env.WEATHER_API; // API key for openweather
+if (!appid) {
+    throw new Error("Error, WEATHER_API key not configured! Please follow .env.example to configure.");
+} 
+
+const status = await fetchStatus(appid); // For api status code
+// Will throw error incorrect api key is configure
+if (status === 401) {
+    throw new Error("Api key is invalid.");
+}
+
 app.get('/', async(req, res) => {
     res.json({ message: "Server is healthy!"})
 });
@@ -19,7 +32,6 @@ app.get('/', async(req, res) => {
 // Current weather data
 app.get('/api/weather/:cityName', async (req, res) => {
     const city = req.params.cityName;
-    const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
 
     try {
@@ -28,7 +40,7 @@ app.get('/api/weather/:cityName', async (req, res) => {
         const params = new URLSearchParams({
             lat,
             lon,
-            appid: apiKey,
+            appid: appid,
             units: unit,
         });
         
@@ -47,7 +59,6 @@ app.get('/api/weather/:cityName', async (req, res) => {
 // Daily forecast for up to 16 days
 app.get('/api/forecast/daily/:cityName/:days', async(req, res) => {
     const city = req.params.cityName;
-    const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
     const numberOfDays = req.params.days;
 
@@ -57,7 +68,7 @@ app.get('/api/forecast/daily/:cityName/:days', async(req, res) => {
         const params = new URLSearchParams({
             lat, 
             lon, 
-            appid: apiKey,
+            appid: appid,
             cnt: numberOfDays,
             units: unit,
         });
@@ -77,7 +88,6 @@ app.get('/api/forecast/daily/:cityName/:days', async(req, res) => {
 // Hourly forecast for up to 4 days
 app.get('/api/forecast/hourly/:cityName/:hours', async(req, res) => {
     const city = req.params.cityName;
-    const apiKey = process.env.WEATHER_API;
     const unit = req.query.units;
     const timestamps = req.params.hours 
 
@@ -87,7 +97,7 @@ app.get('/api/forecast/hourly/:cityName/:hours', async(req, res) => {
         const params = new URLSearchParams({
             lat,
             lon,
-            appid: apiKey,
+            appid: appid,
             cnt: timestamps,
             units: unit,
         });
