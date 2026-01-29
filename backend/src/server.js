@@ -34,6 +34,10 @@ app.get('/api/weather/:cityName', async (req, res) => {
     const city = req.params.cityName;
     const unit = req.query.units;
 
+    if (city.trim().length === 0 || city === null || city === undefined) {
+        res.status(400).json({ error: "City name is missing! Please provide a city name." });
+    }
+    
     try {
         const { lat, lon } = await fetchGeolocation(city, apiKey);
 
@@ -61,6 +65,10 @@ app.get('/api/forecast/daily/:cityName/:days', async(req, res) => {
     const city = req.params.cityName;
     const unit = req.query.units;
     const numberOfDays = req.params.days;
+
+    if (city.trim().length === 0 || city === null || city === undefined) {
+        res.status(400).json({ error: "City name is missing! Please provide a city name." });
+    }
 
     try {
         const { lat, lon } = await fetchGeolocation(city, apiKey);
@@ -90,6 +98,10 @@ app.get('/api/forecast/hourly/:cityName/:hours', async(req, res) => {
     const city = req.params.cityName;
     const unit = req.query.units;
     const timestamps = req.params.hours 
+
+    if (city.trim().length === 0 || city === null || city === undefined) {
+        res.status(400).json({ error: "City name is missing! Please provide a city name." });
+    }
 
     try {
         const { lat, lon } = await fetchGeolocation(city, apiKey);
