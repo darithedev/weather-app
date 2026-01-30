@@ -6,8 +6,10 @@ function App() {
   const [result, setResult] = useState(null);
   const [unit, setUnit] = useState("imperial")
 
-  const url = `http://localhost:8080/api/weather/${city}?units=${unit}`;
-  
+  const dailyWeather = () => {
+    const url = `http://localhost:8080/api/weather/${city}?units=${unit}`;
+  }
+
   return (
    <div>
 
