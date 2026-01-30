@@ -38,9 +38,9 @@ function App() {
     error.preventDefault();
     dailyForecast();
   }
-  
+
   return (
-   <div>
+   <div className="App">
 
    </div>
   )
