@@ -29,6 +29,11 @@ function App() {
       })
   }
 
+  const handleSubmitDailyWeather = (error) => {
+    error.preventDefault();
+    dailyWeather();
+  }
+
   return (
    <div>
 
