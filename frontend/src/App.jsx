@@ -34,6 +34,11 @@ function App() {
     dailyWeather();
   }
 
+  const handleSubmitDailyForecast = (error) => {
+    error.preventDefault();
+    dailyForecast();
+  }
+  
   return (
    <div>
 
