@@ -1,5 +1,7 @@
 import './App.css'
 import { useState } from 'react';
+import WeatherForm from './components/weatherForm';
+import weatherCard from './components/weatherCard'
 
 function App() {
   const [city, setCity] = useState("");
@@ -41,7 +43,8 @@ function App() {
 
   return (
    <div className="App">
-
+    <weatherForm city={city} unit={unit} days={days} handleSubmit={handleSubmitDailyWeather} />
+    {!result ? <p>Submit a city name to see the weather or forcast.</p> : <weatherCard data={result} /> }
    </div>
   )
 }
