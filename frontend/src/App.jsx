@@ -33,7 +33,9 @@ function App() {
 
   const handleSubmitDailyWeather = (error) => {
     error.preventDefault();
-    dailyWeather();
+
+    const inputForCityName = error.target.city.value;
+    dailyWeather(inputForCityName);
   }
 
   const handleSubmitDailyForecast = (error) => {
