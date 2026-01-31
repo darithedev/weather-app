@@ -8,9 +8,12 @@ dotenv.config({ path: '.env' });
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 8080;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173' // allow only frontend to connect
+}));
+
 app.use(express.json());
 
 // Will throw error if .env is not configured with api key
@@ -37,9 +40,9 @@ app.get('/api/weather/:cityName', async (req, res) => {
     if (city.trim().length === 0 || city === null || city === undefined) {
         res.status(400).json({ error: "City name is missing! Please provide a city name." });
     }
-    
+
     try {
-        const { lat, lon } = await fetchGeolocation(city, apiKey);
+        const { lat, lon } = await fetchGeolocation(city, appid);
 
         const params = new URLSearchParams({
             lat,
@@ -71,7 +74,7 @@ app.get('/api/forecast/daily/:cityName/:days', async(req, res) => {
     }
 
     try {
-        const { lat, lon } = await fetchGeolocation(city, apiKey);
+        const { lat, lon } = await fetchGeolocation(city, appid);
 
         const params = new URLSearchParams({
             lat, 
@@ -104,7 +107,7 @@ app.get('/api/forecast/hourly/:cityName/:hours', async(req, res) => {
     }
 
     try {
-        const { lat, lon } = await fetchGeolocation(city, apiKey);
+        const { lat, lon } = await fetchGeolocation(city, appid);
 
         const params = new URLSearchParams({
             lat,
@@ -126,6 +129,6 @@ app.get('/api/forecast/hourly/:cityName/:hours', async(req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '127.0.0.1', () => {
     console.log(`Server listening on ${PORT}`)
 });
