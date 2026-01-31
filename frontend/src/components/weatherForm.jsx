@@ -10,7 +10,6 @@ const WeatherForm = (props) => {
                     name="city"
                 />
                 <label>
-                    Unit: 
                     <select
                         value={props.unit}
                         onChange={(event) => props.setUnit(event.target.value)}
