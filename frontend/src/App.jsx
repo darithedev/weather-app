@@ -1,7 +1,7 @@
 import './App.css'
 import { useState } from 'react';
-import weatherForm from './components/weatherForm';
-import weatherCard from './components/weatherCard'
+import WeatherForm from './components/weatherForm';
+import WeatherCard from './components/weatherCard'
 
 function App() {
   const [city, setCity] = useState("");
@@ -47,8 +47,8 @@ function App() {
 
   return (
    <div className="App">
-    <weatherForm city={city} unit={unit} days={days} handleSubmit={handleSubmitDailyWeather} />
-    {!result ? <p>Submit a city name to see the weather or forcast.</p> : <weatherCard data={result} /> }
+    <WeatherForm city={city} unit={unit} days={days} handleSubmit={handleSubmitDailyWeather} />
+    {!result ? <p>Submit a city name to see the weather or forcast.</p> : <WeatherCard data={result} /> }
    </div>
   )
 }
