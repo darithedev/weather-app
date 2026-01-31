@@ -7,7 +7,8 @@ function App() {
   const [city, setCity] = useState("");
   const [result, setResult] = useState(null);
   const [unit, setUnit] = useState("imperial");
-  const [days, setDays] = useState(7)
+  const [days, setDays] = useState(7);
+  const [hours, setHours] = useState(12);
 
   const dailyWeather = () => {
     const url = `http://localhost:8080/api/weather/${city}?units=${unit}`;
@@ -26,7 +27,17 @@ function App() {
       .then((response) => response.json())
       .then((result) => {
         setResult(result);
-      })
+      });
+  }
+
+  const hourlyForecast = () => {
+    const url = `http://localhost:8080/api/forecast/hourly/${city}/${hours}?units=${unit}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        setResult(result);
+      });
   }
 
   const handleSubmitDailyWeather = (event) => {
@@ -43,6 +54,15 @@ function App() {
     const inputForDays = event.target.days.value;
     setCity(inputForCityName);
     setDays(inputForDays);
+  }
+
+  const handleSubmitHourlyForecast = (event) => {
+    event.preventDefault();
+
+    const inputForCityName = event.target.city.value;
+    const inputForHours = event.target.days.value;
+    setCity(inputForCityName);
+    setHours(inputForHours);
   }
 
   useEffect(() => {
