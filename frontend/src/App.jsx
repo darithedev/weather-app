@@ -23,7 +23,7 @@ function App() {
     const url = `http://localhost:8080/api/forecast/daily/${city}/${days}?units=${unit}`;
 
     fetch(url)
-      .then((result) => response.json())
+      .then((response) => response.json())
       .then((result) => {
         setResult(result);
       })
@@ -43,12 +43,12 @@ function App() {
 
   useEffect(() => {
     if (city) dailyWeather();
-  }, [city]);
+  }, [city, unit]);
 
   return (
    <div className="App">
-    <WeatherForm city={city} unit={unit} days={days} handleSubmit={handleSubmitDailyWeather} />
-    {!result ? <p>Submit a city name to see the weather or forcast.</p> : <WeatherCard data={result} /> }
+    <WeatherForm city={city} unit={unit} setUnit={setUnit} days={days} handleSubmit={handleSubmitDailyWeather} />
+    {!result ? <p>Submit a city name to see the weather or forcast.</p> : <WeatherCard data={result} unit={unit} /> }
    </div>
   )
 }
