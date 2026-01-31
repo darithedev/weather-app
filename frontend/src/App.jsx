@@ -15,7 +15,6 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        setCity(result.weather[0].name);
         setResult(result);
       });
   }
@@ -26,7 +25,6 @@ function App() {
     fetch(url)
       .then((result) => response.json())
       .then((result) => {
-        setCity(result.weather[0].name);
         setResult(result);
       })
   }
@@ -35,13 +33,17 @@ function App() {
     error.preventDefault();
 
     const inputForCityName = error.target.city.value;
-    dailyWeather(inputForCityName);
+    setCity(inputForCityName);
   }
 
   const handleSubmitDailyForecast = (error) => {
     error.preventDefault();
     dailyForecast();
   }
+
+  useEffect(() => {
+    if (city) dailyWeather();
+  }, [city]);
 
   return (
    <div className="App">
