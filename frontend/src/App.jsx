@@ -29,16 +29,20 @@ function App() {
       })
   }
 
-  const handleSubmitDailyWeather = (error) => {
-    error.preventDefault();
+  const handleSubmitDailyWeather = (event) => {
+    event.preventDefault();
 
-    const inputForCityName = error.target.city.value;
+    const inputForCityName = event.target.city.value;
     setCity(inputForCityName);
   }
 
-  const handleSubmitDailyForecast = (error) => {
-    error.preventDefault();
-    dailyForecast();
+  const handleSubmitDailyForecast = (event) => {
+    event.preventDefault();
+
+    const inputForCityName = event.target.city.value;
+    const inputForDays = event.target.days.value;
+    setCity(inputForCityName);
+    setDays(inputForDays);
   }
 
   useEffect(() => {
