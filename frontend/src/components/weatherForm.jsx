@@ -6,9 +6,20 @@ const WeatherForm = (props) => {
                 <input
                     id="city-name"
                     type="text"
-                    placeholder="lease enter city name"
+                    placeholder="Please enter city name"
                     name="city"
                 />
+                <label>
+                    Unit: 
+                    <select
+                        value={props.unit}
+                        onChange={(event) => props.setUnit(event.target.value)}
+                    >
+                        <option value="imperial">&deg;F</option>
+                        <option value="metric">&deg;C</option>
+                    </select>
+                </label>
+
                 <input type="submit" value="Submit" />
             </form>
         </div>
