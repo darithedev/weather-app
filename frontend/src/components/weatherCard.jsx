@@ -1,7 +1,7 @@
 const WeatherCard = ({ data }) => {
 
     return (
-        <div classname="Weather-card">
+        <div className="Weather-card">
             <div className="result">
                 <p>City: <span className="data">{data.name}, {data.sys.country}</span></p>
                 <p>Description: <span className="data">{data.weather[0].description}</span></p>
