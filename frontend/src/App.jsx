@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import WeatherForm from './components/weatherForm';
 import WeatherCard from './components/weatherCard'
 
