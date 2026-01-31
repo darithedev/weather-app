@@ -1,6 +1,6 @@
 import './App.css'
 import { useState } from 'react';
-import WeatherForm from './components/weatherForm';
+import weatherForm from './components/weatherForm';
 import weatherCard from './components/weatherCard'
 
 function App() {
